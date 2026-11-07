@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabalGo | Rider Registration</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+</div>
+
+<!-- AUTHENTICATION PAGE -->
+<div id="auth">
+
+    <header class="auth-nav">
+        <div class="logo">
+            <span class="logo-icon">🏍</span>
+            HABAL<span class="green">GO</span>
+        </div>
+        <span class="nav-label">RIDER REGISTRATION PORTAL</span>
+    </header>
+
+    <div class="auth-layout">
+
+        <div class="hero">
+            <span class="hero-tag">✦ YOUR JOURNEY STARTS HERE</span>
+
+            <h1>
+                Ride With<br>
+                <span class="green">Confidence.</span><br>
+                Register With Us.
+            </h1>
+
+            <p>
+                Welcome to HabalGo! A modern digital registration
+                platform designed to make habal-habal rider registration
+                easier, faster, and more organized.
+            </p>
+
+            <div class="hero-stats">
+                <div>
+                    <h3>01</h3>
+                    <small>Easy Registration</small>
+                </div>
+                <div>
+                    <h3>02</h3>
+                    <small>Secure Access</small>
+                </div>
+                <div>
+                    <h3>03</h3>
+                    <small>Track Application</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div class="auth-card" id="loginCard">
+
+            <h2>Welcome Back!</h2>
+            <p class="subtitle">Sign in to your HabalGo rider account.</p>
+
+            <div id="loginMessage" class="message"></div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input id="loginEmail" type="email"
+                        placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-wrap">
+                        <input id="loginPassword" type="password"
+                            placeholder="Enter your password" required>
+                        <button type="button" class="show-password"
+                            onclick="togglePassword('loginPassword',this)">
+                            SHOW
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" id="remember">
+                        Remember me
+                    </label>
+                    <a onclick="forgotPassword()">Forgot Password?</a>
+                </div>
+
+                <button class="btn btn-primary full" type="submit">
+                    Sign In →
+                </button>
+
+            </form>
+
+            <div class="switch">
+                Don't have an account?
+                <a onclick="showRegister()">Create Account</a>
+            </div>
+        </div>
+
+        <!-- REGISTRATION FORM -->
+        <div class="auth-card hidden" id="registerCard">
+
+            <h2>Create Your Account</h2>
+            <p class="subtitle">Register as a HabalGo rider to get started.</p>
+
+            <div id="registerMessage" class="message"></div>
+
+            <form id="registerForm">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input id="regName" type="text"
+                        placeholder="Enter your complete name" required>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input id="regEmail" type="email"
+                            placeholder="example@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input id="regPhone" type="tel"
+                            placeholder="09XXXXXXXXX"
+                            pattern="09[0-9]{9}" required>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Complete Address</label>
+                    <textarea id="regAddress" rows="2"
+                        placeholder="Barangay, Municipality, Province"
+                        required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Motorcycle Model</label>
+                    <input id="regMotorcycle" type="text"
+                        placeholder="e.g. Honda TMX 125" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Plate Number</label>
+                    <input id="regPlate" type="text"
+                        placeholder="Enter plate number" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-wrap">
+                        <input id="regPassword" type="password"
+                            minlength="8"
+                            placeholder="Minimum 8 characters" required>
+                        <button type="button" class="show-password"
+                            onclick="togglePassword('regPassword',this)">
+                            SHOW
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input id="regConfirm" type="password"
+                        minlength="8"
+                        placeholder="Confirm your password" required>
+                </div>
+
+                <button class="btn btn-primary full" type="submit">
+                    Register as Rider →
+                </button>
+
+            </form>
+
+            <div class="switch">
+                Already have an account?
+                <a onclick="showLogin()">Sign In</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="auth-footer">
+        © 2026 HabalGo. Rider Registration Platform.
+        Ride responsibly. Ride safely.
+    </footer>
+
+</div>
+
+
+<!-- RIDER DASHBOARD -->
+<div id="dashboard" class="hidden">
+
+    <header class="topbar">
+
+        <div class="logo">
+            <span class="logo-icon">🏍</span>
+            HABAL<span class="green">GO</span>
+        </div>
+
+        <div class="topbar-right">
+            <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+            <span class="top-name" id="topName">Rider</span>
+            <div class="avatar" id="topAvatar">R</div>
+        </div>
+
+    </header>
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-title">MAIN MENU</div>
+
+            <div class="nav-item active"
+                onclick="navigate('overview',this)">
+                🏠 Dashboard
+            </div>
+
+            <div class="nav-item"
+                onclick="navigate('profile',this)">
+                👤 My Profile
+            </div>
+
+            <div class="nav-item"
+                onclick="navigate('documents',this)">
+                📄 My Documents
+            </div>
+
+            <div class="nav-item"
+                onclick="navigate('notifications',this)">
+                🔔 Notifications
+            </div>
+
+            <div class="sidebar-title">ACCOUNT</div>
+
+            <div class="nav-item" onclick="logout()">
+                🚪 Sign Out
+            </div>
+
+        </aside>
+
+        <main class="main">
+
+            <!-- DASHBOARD OVERVIEW -->
+            <section class="section active" id="overview">
+
+                <div class="welcome">
+                    <div>
+                        <h1>
+                            Welcome,
+                            <span class="green" id="welcomeName">Rider</span>! 👋
+                        </h1>
+                        <p>Here's your HabalGo rider registration overview.</p>
+                    </div>
+
+                    <button class="btn btn-outline"
+                        onclick="navigateByName('profile')">
+                        Edit Profile
+                    </button>
+                </div>
+
+                <div class="status-banner">
+                    <div>
+                        <h3>🛵 Rider Registration Status</h3>
+                        <p id="statusDescription">
+                            Your account has been registered successfully.
+                            Your application is waiting for review.
+                        </p>
+                    </div>
+                    <span class="status-pill" id="statusPill">
+                        PENDING
+                    </span>
+                </div>
+
+                <div class="cards">
+
+                    <div class="stat-card">
+                        <span class="stat-icon">👤</span>
+                        <small>Account Type</small>
+                        <h2>Rider</h2>
+                        <p>HabalGo Member</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-icon">📋</span>
+                        <small>Application Status</small>
+                        <h2 id="statusCard">Pending</h2>
+                        <p>Registration Review</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-icon">📄</span>
+                        <small>Documents Submitted</small>
+                        <h2 id="documentCount">0 / 3</h2>
+                        <p>Required Documents</p>
+                    </div>
+
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="panel">
+                        <h3>📊 Registration Progress</h3>
+
+                        <p class="muted">
+                            Complete your rider registration requirements.
+                        </p>
+
+                        <div class="progress-bg">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+
+                        <p class="green progress-text" id="progressText">
+                            0% Completed
+                        </p>
+
+                        <button class="btn btn-primary full top-space"
+                            onclick="navigateByName('documents')">
+                            Complete Requirements →
+                        </button>
+                    </div>
+
+                    <div class="panel">
+                        <h3>📌 Requirements Checklist</h3>
+
+                        <ul class="checklist">
+                            <li>
+                                Personal Information
+                                <span class="check">✓</span>
+                            </li>
+                            <li>
+                                Driver's License
+                                <span id="licenseCheck" class="pending">Pending</span>
+                            </li>
+                            <li>
+                                Motorcycle OR/CR
+                                <span id="orcrCheck" class="pending">Pending</span>
+                            </li>
+                            <li>
+                                Valid Identification
+                                <span id="idCheck" class="pending">Pending</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="panel">
+                    <h3>🔔 Recent Activity</h3>
+
+                    <div class="activity">
+                        <p>Account successfully created.</p>
+                        <small>HabalGo Registration System</small>
+                    </div>
+
+                    <div class="activity">
+                        <p>Welcome to HabalGo Rider Portal!</p>
+                        <small>Welcome Notification</small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PROFILE -->
+            <section class="section" id="profile">
+
+                <div class="welcome">
+                    <div>
+                        <h1>My <span class="green">Profile</span></h1>
+                        <p>Manage your personal and motorcycle information.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Personal Information</h3>
+
+                    <form id="profileForm">
+
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input id="profileName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input id="profileEmail" type="email" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input id="profilePhone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Complete Address</label>
+                            <textarea id="profileAddress" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Motorcycle Model</label>
+                            <input id="profileMotorcycle" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Plate Number</label>
+                            <input id="profilePlate" required>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">
+                            Save Changes
+                        </button>
+
+                    </form>
+                </div>
+
+            </section>
+
+
+            <!-- DOCUMENTS -->
+            <section class="section" id="documents">
+
+                <div class="welcome">
+                    <div>
+                        <h1>My <span class="green">Documents</span></h1>
+                        <p>Submit the required documents for verification.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>📂 Upload Requirements</h3>
+
+                    <p class="subtitle">
+                        Accepted formats: JPG, PNG, and PDF.
+                    </p>
+
+                    <form id="documentsForm">
+
+                        <div class="upload-box">
+                            <label>1. Driver's License</label>
+                            <input type="file" id="licenseFile"
+                                accept=".jpg,.jpeg,.png,.pdf">
+                            <small id="licenseFileName"></small>
+                        </div>
+
+                        <div class="upload-box">
+                            <label>2. Motorcycle OR/CR</label>
+                            <input type="file" id="orcrFile"
+                                accept=".jpg,.jpeg,.png,.pdf">
+                            <small id="orcrFileName"></small>
+                        </div>
+
+                        <div class="upload-box">
+                            <label>3. Valid Identification (ID)</label>
+                            <input type="file" id="idFile"
+                                accept=".jpg,.jpeg,.png,.pdf">
+                            <small id="idFileName"></small>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">
+                            Submit Documents →
+                        </button>
+
+                    </form>
+                </div>
+
+            </section>
+
+
+            <!-- NOTIFICATIONS -->
+            <section class="section" id="notifications">
+
+                <div class="welcome">
+                    <div>
+                        <h1>My <span class="green">Notifications</span></h1>
+                        <p>Stay updated with HabalGo announcements.</p>
+                    </div>
+                </div>
+
+                <div class="notification">
+                    <p>🎉 Welcome to HabalGo!</p>
+                    <small>Your rider account has been successfully created.</small>
+                </div>
+
+                <div class="notification">
+                    <p>📄 Complete Your Requirements</p>
+                    <small>Upload your required documents to proceed with verification.</small>
+                </div>
+
+                <div class="notification">
+                    <p>🛡️ Account Security Reminder</p>
+                    <small>Keep your login credentials private and secure.</small>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+<!-- JAVASCRIPT CONNECTION -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
+

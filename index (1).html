@@ -1,0 +1,1651 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HabalGo | Rider Registration</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --green: #20d477;
+  --dark-green: #079653;
+  --black: #080e0b;
+  --white: #ffffff;
+  --gray: #a5b2aa;
+  --surface: #121c16;
+  --border: rgba(255,255,255,.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--black);
+  color: white;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, #087b493d, transparent 35%),
+    radial-gradient(circle at 85% 75%, #12d47720, transparent 35%),
+    #080e0b;
+}
+
+.orb {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: #16c97820;
+  filter: blur(100px);
+  border-radius: 50%;
+  animation: float 8s infinite alternate;
+}
+
+.orb.one { top: 10%; left: 5%; }
+.orb.two { bottom: 5%; right: 5%; animation-delay: 2s; }
+
+@keyframes float {
+  from { transform: translate(0,0); }
+  to { transform: translate(80px,50px); }
+}
+
+.hidden { display: none !important; }
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo-icon {
+  background: linear-gradient(135deg,#20d477,#079653);
+  color: #07130c;
+  padding: 9px;
+  border-radius: 12px;
+}
+
+.green { color: var(--green); }
+
+.btn {
+  border: none;
+  padding: 13px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: .25s;
+}
+
+.btn-primary {
+  color: #06140c;
+  background: linear-gradient(120deg,#20d477,#76f3a9);
+  box-shadow: 0 5px 20px #20d47730;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px #20d47750;
+}
+
+.btn-outline {
+  color: white;
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.full { width: 100%; }
+
+/* AUTHENTICATION */
+
+#auth {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-nav {
+  padding: 25px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-layout {
+  width: 90%;
+  max-width: 1150px;
+  margin: auto;
+  padding: 35px 0 65px;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  align-items: center;
+  gap: 70px;
+}
+
+.hero h1 {
+  font-size: clamp(40px,6vw,68px);
+  line-height: 1.08;
+  letter-spacing: -3px;
+  margin: 22px 0;
+}
+
+.hero p {
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+.hero-tag {
+  display: inline-block;
+  padding: 9px 14px;
+  background: #20d47715;
+  border: 1px solid #20d47745;
+  border-radius: 30px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 35px;
+  margin-top: 40px;
+}
+
+.hero-stats h3 {
+  font-size: 24px;
+}
+
+.hero-stats small {
+  color: var(--gray);
+}
+
+.auth-card {
+  background: #111a14ed;
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: 22px;
+  box-shadow: 0 20px 70px #0008;
+  backdrop-filter: blur(20px);
+}
+
+.auth-card h2 {
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--gray);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 17px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #d6e2d9;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 13px 14px;
+  color: white;
+  background: #09110c;
+  border: 1px solid #26352a;
+  border-radius: 9px;
+  outline: none;
+  transition: .2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px #20d47718;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #647369;
+}
+
+.form-group select option {
+  background: #111a14;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap input {
+  padding-right: 65px;
+}
+
+.show-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--green);
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
+.form-options label {
+  color: var(--gray);
+}
+
+.form-options a, .switch a {
+  color: var(--green);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.switch {
+  color: var(--gray);
+  text-align: center;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+.message {
+  padding: 11px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: none;
+  line-height: 1.5;
+}
+
+.message.error {
+  display: block;
+  background: #ff45451c;
+  color: #ff8c8c;
+}
+
+.message.success {
+  display: block;
+  background: #20d47718;
+  color: #65e9a0;
+}
+
+.auth-footer {
+  text-align: center;
+  color: #708076;
+  font-size: 11px;
+  padding: 20px;
+}
+
+/* DASHBOARD */
+
+#dashboard {
+  min-height: 100vh;
+}
+
+.topbar {
+  height: 75px;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d1710eF;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(15px);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.avatar {
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#20d477,#086b3e);
+  display: grid;
+  place-items: center;
+  color: #07130c;
+  font-weight: 900;
+}
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 245px 1fr;
+  min-height: calc(100vh - 75px);
+}
+
+.sidebar {
+  padding: 25px 15px;
+  border-right: 1px solid var(--border);
+  background: #0c140f;
+}
+
+.sidebar-title {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #748178;
+  padding: 12px;
+  font-weight: 800;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  margin-bottom: 5px;
+  border-radius: 9px;
+  color: #a5b2aa;
+  font-size: 13px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: var(--green);
+  background: #20d47718;
+}
+
+.main {
+  padding: 35px;
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+}
+
+.welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.welcome h1 {
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.welcome p {
+  color: var(--gray);
+  font-size: 13px;
+}
+
+.status-banner {
+  padding: 22px;
+  border-radius: 15px;
+  border: 1px solid #20d47740;
+  background: linear-gradient(110deg,#087b4930,#102017);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.status-banner h3 {
+  margin-bottom: 7px;
+  font-size: 16px;
+}
+
+.status-banner p {
+  color: #aab8ae;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.status-pill {
+  background: #e9a52a20;
+  color: #ffc75d;
+  padding: 9px 13px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.stat-card, .panel {
+  background: #111a14;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.stat-card small {
+  color: var(--gray);
+  font-size: 12px;
+}
+
+.stat-card h2 {
+  font-size: 25px;
+  margin: 12px 0 6px;
+}
+
+.stat-icon {
+  font-size: 22px;
+}
+
+.stat-card p {
+  font-size: 11px;
+  color: var(--green);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.panel h3 {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.progress-bg {
+  background: #29372d;
+  height: 8px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 15px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#079653,#6ff3a6);
+  transition: .5s;
+}
+
+.checklist {
+  list-style: none;
+}
+
+.checklist li {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #cbd6ce;
+}
+
+.checklist li:last-child {
+  border: none;
+}
+
+.check {
+  color: var(--green);
+  font-weight: 800;
+}
+
+.pending {
+  color: #e8b24d;
+  font-size: 11px;
+}
+
+.activity {
+  border-left: 2px solid #20d47750;
+  padding: 3px 0 15px 17px;
+  margin-left: 5px;
+}
+
+.activity p {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.activity small {
+  color: var(--gray);
+  font-size: 10px;
+}
+
+.section {
+  display: none;
+  animation: appear .3s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel form {
+  max-width: 700px;
+}
+
+.upload-box {
+  padding: 15px;
+  background: #09110c;
+  border: 1px dashed #3b6549;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.upload-box label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.upload-box input {
+  font-size: 11px;
+  width: 100%;
+  color: #a5b2aa;
+}
+
+.notification {
+  padding: 17px;
+  background: #142119;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.notification p {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.notification small {
+  color: var(--gray);
+  font-size: 10px;
+}
+
+.mobile-menu {
+  display: none;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: white;
+  padding: 9px;
+  border-radius: 8px;
+}
+
+@media(max-width:900px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    gap: 30px;
+  }
+
+  .hero { text-align: center; }
+  .hero p { margin: auto; }
+  .hero-stats { justify-content: center; }
+  .hero h1 { font-size: 46px; }
+  .dashboard-layout { grid-template-columns: 1fr; }
+  .sidebar {
+    display: none;
+    position: fixed;
+    z-index: 9;
+    top: 75px;
+    bottom: 0;
+    left: 0;
+    width: 245px;
+  }
+  .sidebar.open { display: block; }
+  .mobile-menu { display: block; }
+}
+
+@media(max-width:600px) {
+  .auth-nav { padding: 20px; }
+  .auth-layout { width: 92%; padding-top: 20px; }
+  .auth-card { padding: 23px; }
+  .hero h1 { font-size: 39px; }
+  .main { padding: 20px 14px; }
+  .cards { grid-template-columns: 1fr; }
+  .content-grid { grid-template-columns: 1fr; }
+  .welcome h1 { font-size: 22px; }
+  .status-banner { align-items: flex-start; flex-direction: column; }
+  .topbar { padding: 0 15px; }
+  .topbar .logo { font-size: 19px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+</div>
+
+<!-- AUTHENTICATION PAGE -->
+
+<div id="auth">
+
+  <header class="auth-nav">
+    <div class="logo">
+      <span class="logo-icon">🏍</span>
+      HABAL<span class="green">GO</span>
+    </div>
+    <span style="font-size:11px;color:#a5b2aa">
+      RIDER REGISTRATION PORTAL
+    </span>
+  </header>
+
+  <div class="auth-layout">
+
+    <div class="hero">
+      <span class="hero-tag">✦ YOUR JOURNEY STARTS HERE</span>
+
+      <h1>
+        Ride With<br>
+        <span class="green">Confidence.</span><br>
+        Register With Us.
+      </h1>
+
+      <p>
+        Welcome to HabalGo! A modern digital registration
+        platform designed to make habal-habal rider registration
+        easier, faster, and more organized.
+      </p>
+
+      <div class="hero-stats">
+        <div>
+          <h3>01</h3>
+          <small>Easy Registration</small>
+        </div>
+        <div>
+          <h3>02</h3>
+          <small>Secure Access</small>
+        </div>
+        <div>
+          <h3>03</h3>
+          <small>Track Application</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGIN FORM -->
+
+    <div class="auth-card" id="loginCard">
+      <h2>Welcome Back!</h2>
+      <p class="subtitle">
+        Sign in to your HabalGo rider account.
+      </p>
+
+      <div id="loginMessage" class="message"></div>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input id="loginEmail" type="email"
+            placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-wrap">
+            <input id="loginPassword" type="password"
+              placeholder="Enter your password" required>
+            <button type="button" class="show-password"
+              onclick="togglePassword('loginPassword',this)">
+              SHOW
+            </button>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label>
+            <input type="checkbox" id="remember">
+            Remember me
+          </label>
+          <a onclick="forgotPassword()">Forgot Password?</a>
+        </div>
+
+        <button class="btn btn-primary full" type="submit">
+          Sign In →
+        </button>
+
+      </form>
+
+      <div class="switch">
+        Don't have an account?
+        <a onclick="showRegister()">Create Account</a>
+      </div>
+    </div>
+
+    <!-- REGISTRATION FORM -->
+
+    <div class="auth-card hidden" id="registerCard">
+      <h2>Create Your Account</h2>
+      <p class="subtitle">
+        Register as a HabalGo rider to get started.
+      </p>
+
+      <div id="registerMessage" class="message"></div>
+
+      <form id="registerForm">
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input id="regName" type="text"
+            placeholder="Enter your complete name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input id="regEmail" type="email"
+              placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input id="regPhone" type="tel"
+              placeholder="09XXXXXXXXX" pattern="09[0-9]{9}" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Complete Address</label>
+          <textarea id="regAddress" rows="2"
+            placeholder="Barangay, Municipality, Province"
+            required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Motorcycle Model</label>
+          <input id="regMotorcycle" type="text"
+            placeholder="e.g. Honda TMX 125" required>
+        </div>
+
+        <div class="form-group">
+          <label>Plate Number</label>
+          <input id="regPlate" type="text"
+            placeholder="Enter plate number" required>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-wrap">
+            <input id="regPassword" type="password"
+              minlength="8" placeholder="Minimum 8 characters" required>
+            <button type="button" class="show-password"
+              onclick="togglePassword('regPassword',this)">
+              SHOW
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input id="regConfirm" type="password"
+            minlength="8" placeholder="Confirm your password" required>
+        </div>
+
+        <button class="btn btn-primary full" type="submit">
+          Register as Rider →
+        </button>
+
+      </form>
+
+      <div class="switch">
+        Already have an account?
+        <a onclick="showLogin()">Sign In</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="auth-footer">
+    © 2026 HabalGo. Rider Registration Platform.
+    Ride responsibly. Ride safely.
+  </footer>
+
+</div>
+
+
+<!-- RIDER DASHBOARD -->
+
+<div id="dashboard" class="hidden">
+
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-icon">🏍</span>
+      HABAL<span class="green">GO</span>
+    </div>
+
+    <div class="topbar-right">
+      <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+      <span style="font-size:12px;color:#a5b2aa" id="topName">
+        Rider
+      </span>
+      <div class="avatar" id="topAvatar">R</div>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+
+    <aside class="sidebar" id="sidebar">
+
+      <div class="sidebar-title">MAIN MENU</div>
+
+      <div class="nav-item active" onclick="navigate('overview',this)">
+        🏠 Dashboard
+      </div>
+
+      <div class="nav-item" onclick="navigate('profile',this)">
+        👤 My Profile
+      </div>
+
+      <div class="nav-item" onclick="navigate('documents',this)">
+        📄 My Documents
+      </div>
+
+      <div class="nav-item" onclick="navigate('notifications',this)">
+        🔔 Notifications
+      </div>
+
+      <div class="sidebar-title">ACCOUNT</div>
+
+      <div class="nav-item" onclick="logout()">
+        🚪 Sign Out
+      </div>
+
+    </aside>
+
+    <main class="main">
+
+      <!-- OVERVIEW -->
+
+      <section class="section active" id="overview">
+
+        <div class="welcome">
+          <div>
+            <h1>Welcome, <span class="green" id="welcomeName">Rider</span>! 👋</h1>
+            <p>Here's your HabalGo rider registration overview.</p>
+          </div>
+          <button class="btn btn-outline"
+            onclick="navigateByName('profile')">
+            Edit Profile
+          </button>
+        </div>
+
+        <div class="status-banner">
+          <div>
+            <h3>🛵 Rider Registration Status</h3>
+            <p id="statusDescription">
+              Your account has been registered successfully.
+              Your application is waiting for review.
+            </p>
+          </div>
+          <span class="status-pill" id="statusPill">
+            PENDING
+          </span>
+        </div>
+
+        <div class="cards">
+
+          <div class="stat-card">
+            <span class="stat-icon">👤</span>
+            <br>
+            <small>Account Type</small>
+            <h2>Rider</h2>
+            <p>HabalGo Member</p>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-icon">📋</span>
+            <br>
+            <small>Application Status</small>
+            <h2 id="statusCard">Pending</h2>
+            <p>Registration Review</p>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-icon">📄</span>
+            <br>
+            <small>Documents Submitted</small>
+            <h2 id="documentCount">0 / 3</h2>
+            <p>Required Documents</p>
+          </div>
+
+        </div>
+
+        <div class="content-grid">
+
+          <div class="panel">
+            <h3>📊 Registration Progress</h3>
+            <p style="font-size:12px;color:#a5b2aa">
+              Complete your rider registration requirements.
+            </p>
+
+            <div class="progress-bg">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <p style="font-size:12px;color:var(--green)"
+              id="progressText">0% Completed</p>
+
+            <button class="btn btn-primary full"
+              style="margin-top:20px"
+              onclick="navigateByName('documents')">
+              Complete Requirements →
+            </button>
+          </div>
+
+          <div class="panel">
+            <h3>📌 Requirements Checklist</h3>
+            <ul class="checklist">
+              <li>
+                Personal Information
+                <span class="check">✓</span>
+              </li>
+              <li>
+                Driver's License
+                <span id="licenseCheck" class="pending">Pending</span>
+              </li>
+              <li>
+                Motorcycle OR/CR
+                <span id="orcrCheck" class="pending">Pending</span>
+              </li>
+              <li>
+                Valid Identification
+                <span id="idCheck" class="pending">Pending</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="panel">
+          <h3>🔔 Recent Activity</h3>
+
+          <div class="activity">
+            <p>Account successfully created.</p>
+            <small>HabalGo Registration System</small>
+          </div>
+
+          <div class="activity">
+            <p>Welcome to HabalGo Rider Portal!</p>
+            <small>Welcome Notification</small>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PROFILE -->
+
+      <section class="section" id="profile">
+
+        <div class="welcome">
+          <div>
+            <h1>My <span class="green">Profile</span></h1>
+            <p>Manage your personal and motorcycle information.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Personal Information</h3>
+
+          <form id="profileForm">
+
+            <div class="form-group">
+              <label>Full Name</label>
+              <input id="profileName" required>
+            </div>
+
+            <div class="form-group">
+              <label>Email Address</label>
+              <input id="profileEmail" type="email" disabled>
+            </div>
+
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input id="profilePhone" required>
+            </div>
+
+            <div class="form-group">
+              <label>Complete Address</label>
+              <textarea id="profileAddress" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Motorcycle Model</label>
+              <input id="profileMotorcycle" required>
+            </div>
+
+            <div class="form-group">
+              <label>Plate Number</label>
+              <input id="profilePlate" required>
+            </div>
+
+            <button class="btn btn-primary" type="submit">
+              Save Changes
+            </button>
+
+          </form>
+        </div>
+
+      </section>
+
+
+      <!-- DOCUMENTS -->
+
+      <section class="section" id="documents">
+
+        <div class="welcome">
+          <div>
+            <h1>My <span class="green">Documents</span></h1>
+            <p>Submit the required documents for verification.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>📂 Upload Requirements</h3>
+
+          <p class="subtitle">
+            Select a file for each required document.
+            Accepted formats: JPG, PNG, and PDF.
+          </p>
+
+          <form id="documentsForm">
+
+            <div class="upload-box">
+              <label>1. Driver's License</label>
+              <input type="file" id="licenseFile"
+                accept=".jpg,.jpeg,.png,.pdf">
+              <small id="licenseFileName"
+                style="color:#a5b2aa"></small>
+            </div>
+
+            <div class="upload-box">
+              <label>2. Motorcycle OR/CR</label>
+              <input type="file" id="orcrFile"
+                accept=".jpg,.jpeg,.png,.pdf">
+              <small id="orcrFileName"
+                style="color:#a5b2aa"></small>
+            </div>
+
+            <div class="upload-box">
+              <label>3. Valid Identification (ID)</label>
+              <input type="file" id="idFile"
+                accept=".jpg,.jpeg,.png,.pdf">
+              <small id="idFileName"
+                style="color:#a5b2aa"></small>
+            </div>
+
+            <button class="btn btn-primary" type="submit">
+              Submit Documents →
+            </button>
+
+          </form>
+        </div>
+
+      </section>
+
+
+      <!-- NOTIFICATIONS -->
+
+      <section class="section" id="notifications">
+
+        <div class="welcome">
+          <div>
+            <h1>My <span class="green">Notifications</span></h1>
+            <p>Stay updated with HabalGo announcements.</p>
+          </div>
+        </div>
+
+        <div class="notification">
+          <p>🎉 Welcome to HabalGo!</p>
+          <small>
+            Your rider account has been successfully created.
+          </small>
+        </div>
+
+        <div class="notification">
+          <p>📄 Complete Your Requirements</p>
+          <small>
+            Upload your required documents to proceed with verification.
+          </small>
+        </div>
+
+        <div class="notification">
+          <p>🛡️ Account Security Reminder</p>
+          <small>
+            Keep your login credentials private and secure.
+          </small>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+</div>
+
+
+<script>
+
+// ====================================
+// HABALGO JAVASCRIPT
+// ====================================
+
+// Demo storage
+const STORAGE_KEY = "habalgo_riders";
+const SESSION_KEY = "habalgo_session";
+
+function getRiders() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+}
+
+function saveRiders(riders) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(riders));
+}
+
+function currentRider() {
+  const email = sessionStorage.getItem(SESSION_KEY);
+  return getRiders().find(r => r.email === email);
+}
+
+function updateRider(updated) {
+  const riders = getRiders();
+  const index = riders.findIndex(r => r.email === updated.email);
+
+  if (index !== -1) {
+    riders[index] = updated;
+    saveRiders(riders);
+  }
+}
+
+// ====================================
+// PAGE SWITCHING
+// ====================================
+
+function showLogin() {
+  document.getElementById("loginCard").classList.remove("hidden");
+  document.getElementById("registerCard").classList.add("hidden");
+}
+
+function showRegister() {
+  document.getElementById("loginCard").classList.add("hidden");
+  document.getElementById("registerCard").classList.remove("hidden");
+}
+
+function togglePassword(id, button) {
+  const input = document.getElementById(id);
+  const isPassword = input.type === "password";
+
+  input.type = isPassword ? "text" : "password";
+  button.textContent = isPassword ? "HIDE" : "SHOW";
+}
+
+function showMessage(id, text, type) {
+  const box = document.getElementById(id);
+  box.textContent = text;
+  box.className = "message " + type;
+}
+
+// ====================================
+// RIDER REGISTRATION
+// ====================================
+
+document.getElementById("registerForm")
+.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const name = document.getElementById("regName").value.trim();
+  const email = document.getElementById("regEmail").value.trim().toLowerCase();
+  const phone = document.getElementById("regPhone").value.trim();
+  const address = document.getElementById("regAddress").value.trim();
+  const motorcycle = document.getElementById("regMotorcycle").value.trim();
+  const plate = document.getElementById("regPlate").value.trim();
+  const password = document.getElementById("regPassword").value;
+  const confirm = document.getElementById("regConfirm").value;
+
+  if (password.length < 8) {
+    showMessage("registerMessage",
+      "Password must contain at least 8 characters.", "error");
+    return;
+  }
+
+  if (password !== confirm) {
+    showMessage("registerMessage",
+      "Passwords do not match!", "error");
+    return;
+  }
+
+  const riders = getRiders();
+
+  if (riders.some(r => r.email === email)) {
+    showMessage("registerMessage",
+      "This email is already registered. Please sign in.", "error");
+    return;
+  }
+
+  const rider = {
+    name,
+    email,
+    phone,
+    address,
+    motorcycle,
+    plate,
+    password,
+    status: "Pending",
+    documents: {
+      license: false,
+      orcr: false,
+      id: false
+    },
+    createdAt: new Date().toLocaleDateString()
+  };
+
+  riders.push(rider);
+  saveRiders(riders);
+
+  showMessage("registerMessage",
+    "Registration successful! You can now sign in.", "success");
+
+  document.getElementById("registerForm").reset();
+
+  setTimeout(showLogin, 1500);
+
+});
+
+
+// ====================================
+// LOGIN SYSTEM
+// ====================================
+
+document.getElementById("loginForm")
+.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const email = document.getElementById("loginEmail")
+    .value.trim().toLowerCase();
+
+  const password = document.getElementById("loginPassword").value;
+
+  const rider = getRiders().find(r =>
+    r.email === email && r.password === password
+  );
+
+  if (!rider) {
+    showMessage("loginMessage",
+      "Invalid email or password. Please try again.", "error");
+    return;
+  }
+
+  sessionStorage.setItem(SESSION_KEY, email);
+
+  if (document.getElementById("remember").checked) {
+    localStorage.setItem("habalgo_remember", email);
+  } else {
+    localStorage.removeItem("habalgo_remember");
+  }
+
+  openDashboard();
+
+});
+
+
+// ====================================
+// FORGOT PASSWORD
+// ====================================
+
+function forgotPassword() {
+  const email = prompt("Enter your registered email address:");
+
+  if (!email) return;
+
+  const rider = getRiders().find(r =>
+    r.email === email.trim().toLowerCase()
+  );
+
+  if (rider) {
+    alert("Account found! Please contact the HabalGo administrator to reset your password.");
+  } else {
+    alert("Email address is not registered.");
+  }
+}
+
+
+// ====================================
+// DASHBOARD
+// ====================================
+
+function openDashboard() {
+
+  const rider = currentRider();
+
+  if (!rider) {
+    logout();
+    return;
+  }
+
+  document.getElementById("auth").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+
+  document.getElementById("welcomeName").textContent = rider.name;
+  document.getElementById("topName").textContent = rider.name;
+  document.getElementById("topAvatar").textContent =
+    rider.name.charAt(0).toUpperCase();
+
+  document.getElementById("profileName").value = rider.name;
+  document.getElementById("profileEmail").value = rider.email;
+  document.getElementById("profilePhone").value = rider.phone;
+  document.getElementById("profileAddress").value = rider.address;
+  document.getElementById("profileMotorcycle").value = rider.motorcycle;
+  document.getElementById("profilePlate").value = rider.plate;
+
+  updateDashboard();
+
+}
+
+
+// ====================================
+// DASHBOARD STATUS
+// ====================================
+
+function updateDashboard() {
+
+  const rider = currentRider();
+
+  if (!rider) return;
+
+  const docs = rider.documents;
+
+  const count = [
+    docs.license,
+    docs.orcr,
+    docs.id
+  ].filter(Boolean).length;
+
+  const percentage = Math.round((count / 3) * 100);
+
+  document.getElementById("documentCount").textContent =
+    count + " / 3";
+
+  document.getElementById("progressBar").style.width =
+    percentage + "%";
+
+  document.getElementById("progressText").textContent =
+    percentage + "% Completed";
+
+  document.getElementById("licenseCheck").textContent =
+    docs.license ? "✓ Submitted" : "Pending";
+
+  document.getElementById("orcrCheck").textContent =
+    docs.orcr ? "✓ Submitted" : "Pending";
+
+  document.getElementById("idCheck").textContent =
+    docs.id ? "✓ Submitted" : "Pending";
+
+  ["licenseCheck","orcrCheck","idCheck"].forEach(id => {
+    const element = document.getElementById(id);
+    element.className =
+      element.textContent.includes("Submitted") ? "check" : "pending";
+  });
+
+  document.getElementById("statusCard").textContent =
+    rider.status;
+
+  document.getElementById("statusPill").textContent =
+    rider.status.toUpperCase();
+
+  document.getElementById("statusDescription").textContent =
+    rider.status === "Approved"
+      ? "Congratulations! Your rider registration has been approved."
+      : rider.status === "Rejected"
+      ? "Your application needs attention. Please contact the administrator."
+      : "Your application is waiting for review by the administrator.";
+
+}
+
+
+// ====================================
+// PROFILE UPDATE
+// ====================================
+
+document.getElementById("profileForm")
+.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const rider = currentRider();
+
+  if (!rider) return;
+
+  rider.name = document.getElementById("profileName").value.trim();
+  rider.phone = document.getElementById("profilePhone").value.trim();
+  rider.address = document.getElementById("profileAddress").value.trim();
+  rider.motorcycle = document.getElementById("profileMotorcycle").value.trim();
+  rider.plate = document.getElementById("profilePlate").value.trim();
+
+  updateRider(rider);
+
+  alert("Your profile has been updated successfully!");
+
+  openDashboard();
+
+});
+
+
+// ====================================
+// DOCUMENT UPLOAD
+// ====================================
+
+document.getElementById("documentsForm")
+.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const rider = currentRider();
+
+  if (!rider) return;
+
+  const fields = [
+    {id: "licenseFile", key: "license", label: "licenseFileName"},
+    {id: "orcrFile", key: "orcr", label: "orcrFileName"},
+    {id: "idFile", key: "id", label: "idFileName"}
+  ];
+
+  let uploaded = 0;
+
+  fields.forEach(item => {
+
+    const file = document.getElementById(item.id).files[0];
+
+    if (!file) return;
+
+    const allowed = /\.(jpg|jpeg|png|pdf)$/i.test(file.name);
+
+    if (!allowed) {
+      alert("Invalid file format: " + file.name);
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File must not exceed 5MB: " + file.name);
+      return;
+    }
+
+    rider.documents[item.key] = true;
+
+    document.getElementById(item.label).textContent =
+      "Selected: " + file.name;
+
+    uploaded++;
+
+  });
+
+  if (uploaded === 0) {
+    alert("Please select at least one valid document.");
+    return;
+  }
+
+  updateRider(rider);
+  updateDashboard();
+
+  alert("Document information updated successfully! Remember: this demo only records submission status, not the actual uploaded files.");
+
+  document.getElementById("documentsForm").reset();
+
+});
+
+
+// ====================================
+// NAVIGATION
+// ====================================
+
+function navigate(section, element) {
+
+  document.querySelectorAll(".section").forEach(s => {
+    s.classList.remove("active");
+  });
+
+  document.querySelectorAll(".nav-item").forEach(n => {
+    n.classList.remove("active");
+  });
+
+  document.getElementById(section).classList.add("active");
+
+  if (element) element.classList.add("active");
+
+  document.getElementById("sidebar").classList.remove("open");
+
+}
+
+function navigateByName(section) {
+
+  const items = document.querySelectorAll(".nav-item");
+
+  const map = {
+    overview: 0,
+    profile: 1,
+    documents: 2,
+    notifications: 3
+  };
+
+  navigate(section, items[map[section]]);
+
+}
+
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+
+// ====================================
+// LOGOUT
+// ====================================
+
+function logout() {
+
+  sessionStorage.removeItem(SESSION_KEY);
+
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("auth").classList.remove("hidden");
+
+  document.getElementById("loginForm").reset();
+
+  showLogin();
+
+}
+
+
+// ====================================
+// RESTORE SESSION
+// ====================================
+
+window.addEventListener("load", function() {
+
+  const remembered = localStorage.getItem("habalgo_remember");
+
+  if (remembered && !sessionStorage.getItem(SESSION_KEY)) {
+    const rider = getRiders().find(r => r.email === remembered);
+
+    if (rider) {
+      sessionStorage.setItem(SESSION_KEY, remembered);
+    }
+  }
+
+  if (sessionStorage.getItem(SESSION_KEY)) {
+    openDashboard();
+  }
+
+});
+
+</script>
+
+</body>
+</html>
+
